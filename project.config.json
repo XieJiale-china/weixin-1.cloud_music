@@ -39,7 +39,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.17.0",
+  "libVersion": "2.16.1",
   "appid": "wx8dca8a9674c7788b",
   "projectname": "1-Cloud%20Music",
   "debugOptions": {

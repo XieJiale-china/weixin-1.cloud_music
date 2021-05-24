@@ -1,11 +1,16 @@
 <view class="indexContainer">
-  <!--轮播图-->
+  <!--
+  【轮播图】
+  indicator-dots，indicator-color等等这些都轮播图的配置项
+  -->
   <swiper class="banners" indicator-dots="true" indicator-color="#fff" indicator-active-color="#D43C33" autoplay="true">
-    <swiper-item>
-    <image src="/static/images/nvsheng.jpg"></image>
-    </swiper-item>
-    <swiper-item>
-    <image src="/static/images/nvsheng.jpg"></image>
+    <!--
+    wx:for，循环
+    wx:key，优化性能，系统能快速插入值
+    -->
+    <swiper-item wx:for="{{bannerList}}" wx:key="item.bannerId">
+      <!-- 这里是内容，index和item是默认，不用我们填-->
+      <image src="{{item.pic}}"></image>
     </swiper-item>
   </swiper>
 
@@ -31,48 +36,42 @@
       <text class="iconfont icon-zhiboguankanliangbofangsheyingshexiangjixianxing"></text>
       <text>直播</text>
     </view>
-
-
-  
-
-  
   </view>
 
   <!-- 推荐歌曲 -->
   <view class="recommendContainer">
     <!-- 头部区域 -->
-    <view class="header">
-      <text class="title">推荐歌曲</text>
-      <view>
-        <text>为你精心推荐</text>
-        <text class="more">查看更多</text>
-      </view>
-    </view>
+    <NavHeader title="推荐歌曲" nav="为你精心推荐" ></NavHeader>
 
     <!-- 内容区 -->
     <scroll-view class="recommendScroll" enable-flex scroll-x>
-      <view class="scrollItem" >
-        <image src="/static/images/nvsheng.jpg"></image>
-        <text>文案</text>
-      </view>
-      <view class="scrollItem" >
-        <image src="/static/images/nvsheng.jpg"></image>
-        <text>文案</text>
-      </view>
-      <view class="scrollItem" >
-        <image src="/static/images/nvsheng.jpg"></image>
-        <text>文案</text>
-      </view>
-      <view class="scrollItem" >
-        <image src="/static/images/nvsheng.jpg"></image>
-        <text>文案</text>
-      </view>
-      <view class="scrollItem" >
-        <image src="/static/images/nvsheng.jpg"></image>
-        <text>文案</text>
+      <view class="scrollItem" wx:for="{{personalizedList}}" wx:key="{{item.id}}" >
+        <image src="{{item.picUrl}}"></image>
+        <text>{{item.name}}</text>
       </view>
     </scroll-view>
 
   </view>
+
+  <!--排行榜-->
+  <view class="topList">
+    <!-- 头部区域 -->
+    <NavHeader title="排行榜" nav="热歌风向标" ></NavHeader>
+
+    <!-- 内容区 -->
+    <swiper class="topListSwiper"  next-margin="50rpx" previous-margin="50rpx">
+      <swiper-item wx:for="{{topList}}" wx:key="name">
+        <view class="swiperItem">
+          <view class="title">{{item.name}}</view>
+          <view class="musicItem" wx:for="{{item.tracks}}" wx:key="id" wx:for-item="musicItem">
+            <image src="{{musicItem.al.picUrl}}"></image>
+            <text class="count">{{index + 1}}</text>
+            <text class="musicName">{{musicItem.name}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+ 
 
 </view>
